@@ -1,17 +1,12 @@
-ZendSkeletonApplication
+Test Project
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
+This is the test project.
 
 Installation
-------------
-
-Using Composer (recommended)
-----------------------------
+------------            
 The recommended way to get a working copy of this project is to clone the repository
 and use `composer` to install dependencies using the `create-project` command:
 
@@ -39,25 +34,15 @@ then pass it to `tar`:
 You would then invoke `composer` to install dependencies per the previous
 example.
 
-Using Git submodules
+Project Intallation
 --------------------
-Alternatively, you can install using native git submodules:
+The recommended way to get a working copy of this project is to download the GIT repository from
+https://github.com/MacAbram/Trade
 
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
+Once you have Zend Framework Skeleton Application installed, just extract the files to that folder.
 
 Web Server Setup
 ----------------
-
-### PHP CLI Server
-
-The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
-
-    php -S 0.0.0.0:8080 -t public/ public/index.php
-
-This will start the cli-server on port 8080, and bind it to all network
-interfaces.
-
-**Note: ** The built-in CLI server is *for development only*.
 
 ### Apache Setup
 
@@ -65,13 +50,61 @@ To setup apache, setup a virtual host to point to the public/ directory of the
 project and you should be ready to go! It should look something like below:
 
     <VirtualHost *:80>
-        ServerName zf2-tutorial.localhost
-        DocumentRoot /path/to/zf2-tutorial/public
-        SetEnv APPLICATION_ENV "development"
-        <Directory /path/to/zf2-tutorial/public>
-            DirectoryIndex index.php
-            AllowOverride All
-            Order allow,deny
-            Allow from all
-        </Directory>
+    	ServerName trade.localhost
+    	DocumentRoot C:/xampp/vhosts/trade/public
+    	SetEnv APPLICATION_ENV "development"
+    	ErrorLog "C:/xampp/vhosts/_logs/trade_error.log"
+    	CustomLog C:/xampp/vhosts/_logs/trade_access.log common
+    
+    		<Directory "C:/xampp/vhosts/trade/public/">
+    		DirectoryIndex index.php
+    		Options -Indexes +FollowSymLinks +MultiViews
+    		AllowOverride All
+    		Order Allow,Deny
+    		Allow from all
+    		Require all granted
+    	</Directory>
     </VirtualHost>
+
+Database setup
+--------------
+
+Set up the 'trade' database on your local server and execute the following query
+to create the table:
+    CREATE TABLE `transactions` (
+      `id` int(11) NOT NULL AUTO_INCREMENT,
+      `string` text,
+      `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+      PRIMARY KEY (`id`),
+      KEY `id` (`id`)
+    ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8
+
+Running the project
+-------------------
+
+### Data consumption
+
+The recommended way to run the project is using the Postman plugin for Chrome. 
+This plugin will allow you to set the application-json content type and send data
+via POST in the JSON format.
+
+In Postman you need to set up the following headers:
+Content-Type: application/json
+
+To send data to the API, enter the following URL:
+http://trade.localhost/consume
+and select the POST method
+
+Below the headers, select 'raw' and paste the JSON string to POST.
+Click 'Send'.
+
+The data will be stored in the database.
+
+### Data view
+
+To display all transactions, go to 
+http://trade.localhost
+
+
+
+
