@@ -1,0 +1,38 @@
+<h1>Transaction History</h1>
+<table class="col-md-12 col-lg-12">
+	<thead>
+		<tr>
+			<th class="col-sm-2 col-md-2 col-lg-2">ID</td>
+	 		<th class="col-sm-2 col-md-2 col-lg-2">User Id</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">From</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">To</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">Sell</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">Buy</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">Rate</td>
+	 		<th class="col-sm-2 col-md-2 col-lg-2">Time Placed</td>
+	 		<th class="col-sm-1 col-md-1 col-lg-1">Country</td>		
+		</tr>
+	</thead>
+
+<?php
+
+$i = 1;
+foreach ($transactions as $transaction) {
+ $data = unserialize($transaction->getString());
+	echo '
+ 	<tr>
+ 		<td>'.$i.'</td>
+ 		<td>'.$data->userId.'</td>
+ 		<td>'.$data->currencyFrom.'</td>
+ 		<td>'.$data->currencyTo.'</td>
+ 		<td>'.$data->amountSell.'</td>
+ 		<td>'.$data->amountBuy.'</td>
+ 		<td>'.$data->rate.'</td>
+ 		<td>'.$data->timePlaced.'</td>
+ 		<td>'.$data->originatingCountry.'</td>
+ 	</tr>
+ 	';
+}
+
+?>
+</table>
